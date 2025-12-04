@@ -294,17 +294,6 @@ def main():
             )
             st.session_state.result_saved = True
         
-        # Save result only once
-        if not st.session_state.result_saved:
-            filename = save_test_result(
-                st.session_state.user_name, 
-                correct_answers, 
-                total_questions, 
-                wrong_questions, 
-                test_date
-            )
-            st.session_state.result_saved = True
-        
         # Display results
         st.markdown("---")
         
@@ -325,7 +314,8 @@ def main():
         else:
             st.error(f"📚 {st.session_state.user_name}, you need more practice. Keep studying!")
         
-        st.info(f"💾 Results saved to: {filename}")
+        if st.session_state.result_saved:
+            st.info("💾 Results saved successfully!")
         
         # Wrong answers section
         if wrong_questions:
