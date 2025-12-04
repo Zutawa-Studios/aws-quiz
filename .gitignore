@@ -1,0 +1,14 @@
+# Secrets
+lift.pem
+
+# Python
+__pycache__/
+*.pyc
+
+# Environments
+myenv/
+venv/
+env/
+
+# System
+.DS_Store
