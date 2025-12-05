@@ -80,8 +80,110 @@ def start_new_test(questions, name):
     st.session_state.user_name = name
     st.session_state.result_saved = False
 
+def apply_custom_css():
+    st.markdown("""
+        <style>
+        /* Main background */
+        .stApp {
+            background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+        }
+        
+        /* Headers */
+        h1, h2, h3, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+            color: #38bdf8 !important; /* Sky blue */
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        
+        /* Custom Header Container */
+        .mirai-header {
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mirai-logo {
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            font-size: 4rem;
+            color: #38bdf8;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            display: block;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .mirai-title {
+            font-size: 2rem;
+            color: #e2e8f0;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mirai-subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        /* Buttons */
+        .stButton > button {
+            background: linear-gradient(45deg, #0f172a, #1e293b);
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .stButton > button:hover {
+            background: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            border-color: #38bdf8;
+        }
+        
+        /* Inputs */
+        .stTextInput > div > div > input {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+        
+        /* Progress Bar */
+        .stProgress > div > div > div > div {
+            background-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        
+        /* Metrics */
+        [data-testid="stMetricValue"] {
+            color: #38bdf8 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+def show_header():
+    st.markdown("""
+        <div class="mirai-header">
+            <div class="mirai-logo"></></div>
+            <div class="mirai-title">Mirai Labs</div>
+            <div class="mirai-subtitle">AI & CLOUD SOLUTIONS</div>
+        </div>
+    """, unsafe_allow_html=True)
+
 def main():
-    st.set_page_config(page_title="AWS Certification Quiz", layout="wide")
+    st.set_page_config(page_title="Mirai Labs - Cloud Quiz", page_icon="💻", layout="wide")
+    apply_custom_css()
     
     # Load questions
     questions = load_questions()
@@ -95,8 +197,9 @@ def main():
     
     # Main navigation
     if not st.session_state.test_started:
-        st.title("🚀 AWS Certification Quiz")
-        st.markdown("### Ready to test your AWS knowledge?")
+        show_header()
+        st.markdown("<h3 style='text-align: center; color: #94a3b8 !important;'>Ready to test your Cloud & AI knowledge?</h3>", unsafe_allow_html=True)
+        st.markdown("---")
         
         # Navigation tabs
         tab1, tab2 = st.tabs(["🆕 New Test", "📊 Previous Results"])
@@ -168,7 +271,7 @@ def main():
         # Header
         col1, col2, col3 = st.columns([2, 1, 1])
         with col1:
-            st.title("📝 AWS Certification Quiz")
+            st.markdown("### 📝 Mirai Labs Quiz")
         with col2:
             st.metric("Question", f"{current_q_num + 1}/{total_questions}")
         with col3:
